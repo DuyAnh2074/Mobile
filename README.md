@@ -1,4 +1,4 @@
 họ tên: Nguyễn Viết Duy Anh
 msv: 22810310401
 kết quả:
-![Untitled](https://github.com/user-attachments/assets/4db37d00-4bb8-435b-8abf-ffa7fd3c64ec)
+![ketqua](https://github.com/user-attachments/assets/d05c0522-f8c6-4bc7-b436-ed23fcc83c9a)
