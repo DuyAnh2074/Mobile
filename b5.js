@@ -40,7 +40,7 @@ return(
       <TouchableOpacity style={styles.buttonYellow} onPress={yellow} >
         <Text style={styles.buttonText}>YELLOW</Text>
       </TouchableOpacity>
-
+    
       <TouchableOpacity style={styles.buttonRed} onPress={red} >
         <Text style={styles.buttonText}>RED</Text>
       </TouchableOpacity>
