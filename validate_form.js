@@ -53,7 +53,7 @@ export default function validate_form() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '##E0E0E0',
     padding: 40,
   },
   login:{
