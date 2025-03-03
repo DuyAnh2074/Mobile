@@ -28,18 +28,18 @@ const HomeScreen = () => {
                 <Text style={styles.cardSubtitle}>Scanned 483</Text>
               </View>
               <View style={styles.card}>
-                <Image source={require('./assets/bg-counterfeits.png')} />
+                <Image source={require('./assets/bg-counterfeits.jpg')} />
 
                 <Text style={styles.cardTitle}>Counterfeits</Text>
                 <Text style={styles.cardSubtitle}>Counterfeited 32</Text>
               </View>
               <View style={styles.card}>
-                <Image source={require('./assets/bg-success.png')} />
+                <Image source={require('./assets/bg-success.jpg')} />
                 <Text style={styles.cardTitle}>Success</Text>
                 <Text style={styles.cardSubtitle}>Checkouts 8</Text>
               </View>
               <View style={styles.card}>
-                <Image source={require('./assets/bg-directory.png')} />
+                <Image source={require('./assets/bg-directory.jpg')} />
                 <Text style={styles.cardTitle}>Directory</Text>
                 <Text style={styles.cardSubtitle}>History 26</Text>
               </View>
@@ -87,15 +87,15 @@ const ScanScreen = ({ navigation }) => {
           </TouchableOpacity>
     
           <View style={styles.scanArea}>
-            <Image source={require('./assets/screen-img.png')} style={styles.bottleImage} />
+            <Image source={require('./assets/scan_img.png')} style={styles.bottleImage} />
             <View style={styles.scanOverlay}>
               <View style={styles.scanBorder}></View>
-              <Image source={require('./assets/scan-image.png')} style={styles.scanImage} />
+              <Image source={require('./assets/Group 5.png')} style={styles.scanImage} />
             </View>
           </View>
     
           <View style={styles.infoContainer}>
-            <Image source={require('./assets/info-img.png')} style={styles.thumbnail} />
+            <Image source={require('./assets/Group 4.png')} style={styles.thumbnail} />
             <View style={styles.textContainer}>
               <Text style={styles.subtitle}>Lauren's</Text>
               <Text style={styles.title}>Orange Juice</Text>

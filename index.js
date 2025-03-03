@@ -1,6 +1,6 @@
 import { registerRootComponent } from 'expo';
 
-import App from './scan_app';
+import App from './Nectar';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in Expo Go or in a native build,
