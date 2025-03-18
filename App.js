@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -40,8 +39,16 @@ const MainTabs = () => (
       tabBarInactiveTintColor: 'gray',
     })}
   >
-    <Tab.Screen name="Explorer" component={ExpolerScreen} />
-    <Tab.Screen name="Account" component={AccountScreen} />
+    <Tab.Screen 
+      name="Explorer" 
+      component={ExpolerScreen} 
+    
+    />
+    <Tab.Screen 
+      name="Account" 
+      component={AccountScreen} 
+     
+    />
   </Tab.Navigator>
 );
 
