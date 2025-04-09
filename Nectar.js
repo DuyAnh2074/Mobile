@@ -116,7 +116,7 @@
             },
             logo: {
                 position:'absolute',
-                top:413,
+                top:414,
                 left:73,
             },
             onboardingScreen: {
