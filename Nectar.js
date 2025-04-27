@@ -447,17 +447,227 @@ const FilterScreen = ({ navigation }) => {
   );
 };
 
-const CartScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Cart Screen</Text>
-  </View>
-);
+// Cart Screen
+const CartScreen = () => {
+  const [cartItems, setCartItems] = useState([
+    { id: '1', name: 'Bell Pepper Red', description: '1kg, Price', price: 4.99, quantity: 1, image: require('./assets/bell_pepper.png') },
+    { id: '2', name: 'Egg Chicken Red', description: '4pcs, Price', price: 1.99, quantity: 1, image: require('./assets/egg_chicken_red.png') },
+    { id: '3', name: 'Organic Bananas', description: '12kg, Price', price: 3.00, quantity: 1, image: require('./assets/organic_bananas.png') },
+    { id: '4', name: 'Ginger', description: '250gm, Price', price: 2.99, quantity: 1, image: require('./assets/ginger.png') },
+  ]);
 
-const FavouriteScreen = () => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Favourite Screen</Text>
-  </View>
-);
+  // Hàm tăng số lượng
+  const increaseQuantity = (id) => {
+    setCartItems(cartItems.map(item => 
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    ));
+  };
+
+  // Hàm giảm số lượng
+  const decreaseQuantity = (id) => {
+    setCartItems(cartItems.map(item => 
+      item.id === id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+    ));
+  };
+
+  // Hàm xóa sản phẩm khỏi giỏ hàng
+  const removeItem = (id) => {
+    setCartItems(cartItems.filter(item => item.id !== id));
+  };
+
+  // Tính tổng giá
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={{ flex: 1, paddingHorizontal: 20 }}>
+        {/* Header */}
+        <Text style={{ fontSize: 24, fontWeight: '600', color: '#181725', textAlign: 'center', marginVertical: 20 }}>
+          My Cart
+        </Text>
+
+        {/* Danh sách sản phẩm trong giỏ hàng */}
+        <FlatList
+          data={cartItems}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={{ 
+              flexDirection: 'row', 
+              alignItems: 'center', 
+              paddingVertical: 15, 
+              borderBottomWidth: 1, 
+              borderBottomColor: '#E2E2E2',
+              marginBottom: 10,
+            }}>
+              {/* Hình ảnh sản phẩm */}
+              <Image source={item.image} style={{ width: 60, height: 60, marginRight: 15 }} />
+
+              {/* Thông tin sản phẩm */}
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: '#181725' }}>{item.name}</Text>
+                <Text style={{ fontSize: 14, color: '#7C7C7C', marginTop: 5 }}>{item.description}</Text>
+                
+                {/* Bộ chọn số lượng */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+                  <TouchableOpacity 
+                    onPress={() => decreaseQuantity(item.id)}
+                    style={{ 
+                      width: 30, 
+                      height: 30, 
+                      borderWidth: 1, 
+                      borderColor: '#E2E2E2', 
+                      borderRadius: 5, 
+                      justifyContent: 'center', 
+                      alignItems: 'center' 
+                    }}
+                  >
+                    <Text style={{ fontSize: 20, color: '#181725' }}>-</Text>
+                  </TouchableOpacity>
+                  <Text style={{ fontSize: 16, fontWeight: '600', color: '#181725', marginHorizontal: 15 }}>
+                    {item.quantity}
+                  </Text>
+                  <TouchableOpacity 
+                    onPress={() => increaseQuantity(item.id)}
+                    style={{ 
+                      width: 30, 
+                      height: 30, 
+                      borderWidth: 1, 
+                      borderColor: '#E2E2E2', 
+                      borderRadius: 5, 
+                      justifyContent: 'center', 
+                      alignItems: 'center' 
+                    }}
+                  >
+                    <Text style={{ fontSize: 20, color: '#181725' }}>+</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Giá và nút xóa */}
+              <View style={{ alignItems: 'flex-end' }}>
+                <TouchableOpacity onPress={() => removeItem(item.id)}>
+                  <Text style={{ fontSize: 20, color: '#181725', marginBottom: 10 }}>✕</Text>
+                </TouchableOpacity>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: '#181725' }}>
+                  ${(item.price * item.quantity).toFixed(2)}
+                </Text>
+              </View>
+            </View>
+          )}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+
+        {/* Nút Go to Checkout */}
+        <TouchableOpacity 
+          style={{ 
+            backgroundColor: '#53B175', 
+            borderRadius: 15, 
+            paddingVertical: 15, 
+            alignItems: 'center', 
+            position: 'absolute', 
+            bottom: 80, 
+            left: 20, 
+            right: 20 
+          }}
+        >
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '90%' }}>
+            <Text style={{ fontSize: 18, fontWeight: '600', color: '#fff' }}>Go to Checkout</Text>
+            <Text style={{ fontSize: 18, fontWeight: '600', color: '#fff' }}>${totalPrice}</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+// Favourite Screen
+const FavouriteScreen = () => {
+  const [favouriteItems, setFavouriteItems] = useState([
+    { id: '1', name: 'Sprite Can', description: '325ml, Price', price: 1.50, image: require('./assets/sprite_can.png') },
+    { id: '2', name: 'Diet Coke', description: '355ml, Price', price: 1.99, image: require('./assets/diet_coke.png') },
+    { id: '3', name: 'Apple & Grape Juice', description: '2L, Price', price: 15.50, image: require('./assets/apple_grape_juice.png') },
+    { id: '4', name: 'Coca Cola Can', description: '325ml, Price', price: 4.99, image: require('./assets/coca_cola_can.png') },
+    { id: '5', name: 'Pepsi Can', description: '330ml, Price', price: 4.99, image: require('./assets/pepsi_can.png') },
+  ]);
+
+  // Hàm xóa sản phẩm khỏi danh sách yêu thích
+  const removeItem = (id) => {
+    setFavouriteItems(favouriteItems.filter(item => item.id !== id));
+  };
+
+  // Hàm thêm tất cả vào giỏ hàng (chưa triển khai logic cụ thể)
+  const addAllToCart = () => {
+    // Logic để thêm tất cả sản phẩm vào giỏ hàng
+    alert('All items added to cart!');
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={{ flex: 1, paddingHorizontal: 20 }}>
+        {/* Header */}
+        <Text style={{ fontSize: 24, fontWeight: '600', color: '#181725', textAlign: 'center', marginVertical: 20 }}>
+          Favourite
+        </Text>
+
+        {/* Danh sách sản phẩm yêu thích */}
+        <FlatList
+          data={favouriteItems}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity 
+              style={{ 
+                flexDirection: 'row', 
+                alignItems: 'center', 
+                paddingVertical: 15, 
+                borderBottomWidth: 1, 
+                borderBottomColor: '#E2E2E2',
+                marginBottom: 10,
+              }}
+              onPress={() => navigation.navigate('Product', { product: item })}
+            >
+              {/* Hình ảnh sản phẩm */}
+              <Image source={item.image} style={{  marginRight: 15 }} />
+
+              {/* Thông tin sản phẩm */}
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: '#181725' }}>{item.name}</Text>
+                <Text style={{ fontSize: 14, color: '#7C7C7C', marginTop: 5 }}>{item.description}</Text>
+              </View>
+
+              {/* Giá và nút xóa */}
+              <View style={{ alignItems: 'flex-end', flexDirection: 'row', alignItems: 'center' }}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: '#181725', marginRight: 10 }}>
+                  ${item.price.toFixed(2)}
+                </Text>
+                <TouchableOpacity onPress={() => removeItem(item.id)}>
+                  <Image source={require('./assets/right_arrow.png')}  />
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+
+        {/* Nút Add All To Cart */}
+        <TouchableOpacity 
+          style={{ 
+            backgroundColor: '#53B175', 
+            borderRadius: 15, 
+            paddingVertical: 15, 
+            alignItems: 'center', 
+            position: 'absolute', 
+            bottom: 80, 
+            left: 20, 
+            right: 20 
+          }}
+          onPress={addAllToCart}
+        >
+          <Text style={{ fontSize: 18, fontWeight: '600', color: '#fff' }}>Add All To Cart</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const AccountScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
